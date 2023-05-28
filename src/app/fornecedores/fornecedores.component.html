@@ -1,0 +1,102 @@
+<div class="container mt-4">
+    <h2>Lista de Fornecedores</h2>
+    
+    <!-- Formulário de cadastro -->
+    <div class="card mt-4">
+      <div class="card-header">
+        Cadastrar Fornecedor
+      </div>
+      <div class="card-body">
+        <form (submit)="cadastrarFornecedor()">
+          <div class="form-group">
+            <label for="name">Nome:</label>
+            <input type="text" id="name" class="form-control" [(ngModel)]="novoFornecedor.name" required>
+          </div>
+          <div class="form-group">
+            <label for="active">Ativo:</label>
+            <input type="checkbox" id="active" class="form-control" [(ngModel)]="novoFornecedor.active">
+          </div>
+          <div class="form-group">
+            <label for="category">Categoria:</label>
+            <select id="category" class="form-control" [(ngModel)]="novoFornecedor.category" required>
+              <option value="regional">Regional</option>
+              <option value="nacional">Nacional</option>
+              <option value="internacional">Internacional</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="contact">Contato:</label>
+            <input type="text" id="contact" class="form-control" [(ngModel)]="novoFornecedor.contact" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+      </div>
+    </div>
+    
+    <!-- Tabela de fornecedores -->
+    <div class="card mt-4">
+      <div class="card-header">
+        Lista de Fornecedores
+      </div>
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Ativo</th>
+              <th>Categoria</th>
+              <th>Contato</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let fornecedor of fornecedores">
+              <td>{{ fornecedor.name }}</td>
+              <td>{{ fornecedor.active ? 'Sim' : 'Não' }}</td>
+              <td>{{ fornecedor.category }}</td>
+              <td>{{ fornecedor.contact }}</td>
+              <td>
+                <button class="btn btn-primary btn-sm" (click)="selecionarFornecedor(fornecedor)">Editar</button>
+                <button class="btn btn-danger btn-sm" (click)="excluirFornecedor(fornecedor.id)">Excluir</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <!-- Formulário de edição -->
+    <div class="card mt-4" *ngIf="modoEdicao && fornecedorSelecionado">
+      <div class="card-header">
+        Editar Fornecedor
+      </div>
+      <div class="card-body">
+        <form (submit)="atualizarFornecedor()">
+          <div class="form-group">
+            <label for="editName">Nome:</label>
+            <input type="text" id="editName" class="form-control" [(ngModel)]="fornecedorSelecionado.name" required>
+          </div>
+          <div class="form-group">
+            <label for="editActive">Ativo:</label>
+            <input type="checkbox" id="editActive" class="form-control" [(ngModel)]="fornecedorSelecionado.active">
+          </div>
+          <div class="form-group">
+            <label for="editCategory">Categoria:</label>
+            <select id="editCategory" class="form-control" [(ngModel)]="fornecedorSelecionado.category" required>
+              <option value="regional">Regional</option>
+              <option value="nacional">Nacional</option>
+              <option value="internacional">Internacional</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="editContact">Contato:</label>
+            <input type="text" id="editContact" class="form-control" [(ngModel)]="fornecedorSelecionado.contact" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Atualizar</button>
+          <button type="button" class="btn btn-secondary" (click)="cancelarEdicao()">Cancelar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  
